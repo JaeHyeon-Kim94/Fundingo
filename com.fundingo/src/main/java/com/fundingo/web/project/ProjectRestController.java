@@ -68,7 +68,7 @@ public class ProjectRestController {
 
 
 	
-	@Autowired private CloudVisionTemplate cloudVisionTemplate; 
+	/* @Autowired private CloudVisionTemplate cloudVisionTemplate; */
 	 
 
 	@Autowired
@@ -357,101 +357,102 @@ public class ProjectRestController {
 	
 	  //
 	  
-	  @PostMapping("json/vision") public @ResponseBody List<String>
-	  vision(MultipartHttpServletRequest multipartRequest,
-	  
-	  @RequestParam("type") String type,
-	  
-	  @RequestParam("pjtNo") int pjtNo) throws Exception {
-	  
-	  List<String> list = new ArrayList<String>(); MultipartFile mpf = null;
-	  UploadFile uf = new UploadFile();
-	  
-	  mpf = multipartRequest.getFile(type);
-	  uf.setOriginFileName(mpf.getOriginalFilename());
-	  
-	  
-	  String dirPath = IMG_PATH + "/" + pjtNo; LOGGER.info("dirPath : "+dirPath);
-	  File folder = new File(dirPath); if(!folder.exists()) { try {
-	  
-	  folder.mkdirs();
-	  
-	  }catch(Exception e){
-	  
-	  e.printStackTrace();
-	  
-	  }
-	  
-	  }else {
-	  
-	  LOGGER.info("directory already exits");
-	  
-	  }
-	  
-	  uf.setSaveFileName(dirPath+"/"+uf.getOriginFileName()); mpf.transferTo(new
-	  File(uf.getSaveFileName()));
-	  
-	  
-	  
-	  
-	  String textFromImage = this.cloudVisionTemplate
-	  .extractTextFromImage(this.resourceLoader.getResource("file:" +
-	  uf.getSaveFileName()));
-	  
-	  LOGGER.info(" parsedTextByVision : "+textFromImage);
-	  
-	  if (type.equals("IDCard")) {
-	  
-	  if (textFromImage.indexOf("운전") != -1) { String tnws =
-	  textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Matcher matcher =
-	  CI_PATTERN.matcher(tnws); boolean ex = matcher.find(); LOGGER.info(ex);
-	  if(ex) { String CI = matcher.group(); LOGGER.info(CI); String name =
-	  tnws.substring(tnws.indexOf(CI) - 3, tnws.indexOf(CI));
-	  
-	  list.add(CI); list.add(name); } } else if (textFromImage.indexOf("주민") != -1)
-	  { String tnws = textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Matcher
-	  matcher = CI_PATTERN.matcher(tnws); boolean ex = matcher.find();
-	  LOGGER.info(ex); if(ex){ String CI = matcher.group(); LOGGER.info(CI); int
-	  start = tnws.indexOf("주민등록증") + "주민등록증".length(); int end = start + 3; String
-	  name = tnws.substring(start, end); list.add(CI); list.add(name); } } }
-	  
-	  if (type.equals("account")) {
-	  
-	  }
-	  
-	  if (type.equals("businessLicense")) { String tnws =
-	  textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Pattern pattern =
-	  Pattern.compile("\\d{3}\\-\\d{2}\\-\\d{5}"); Matcher matcher =
-	  pattern.matcher(tnws); boolean b = matcher.find();
-	  
-	  LOGGER.info(b); if(b) { String businessLicenseNo = matcher.group();
-	  LOGGER.info(businessLicenseNo); list.add(businessLicenseNo);
-	  if(tnws.indexOf("법인사업자") != -1) { int start = tnws.indexOf("단체명")+5; int end
-	  = tnws.indexOf("대표자"); String corporateName = tnws.substring(start, end);
-	  LOGGER.info(corporateName);
-	  
-	  String sellerName = tnws.substring(tnws.indexOf("대표자:")+4,
-	  tnws.indexOf("개업"));
-	  
-	  LOGGER.info(sellerName);
-	  
-	  list.add(sellerName); list.add(corporateName);
-	  
-	  }else if(tnws.indexOf("일반과세자")!=-1) { int start =
-	  tnws.indexOf(businessLicenseNo); int startSangho = tnws.indexOf(":",
-	  start)+1; int endSangho = tnws.indexOf(":", startSangho)-2;
-	  LOGGER.info(start+"/"+startSangho + "/" + endSangho); String sangho =
-	  tnws.substring(startSangho, endSangho); String name =
-	  tnws.substring(tnws.indexOf(":", endSangho)+1, tnws.indexOf("월일",
-	  endSangho)-3); LOGGER.info(sangho); LOGGER.info(name); list.add(name);
-	  list.add(sangho); } }
-	  
-	  }
-	  
-	  return list; }
-	 
-	 //
-	
+		/*
+		 * @PostMapping("json/vision") public @ResponseBody List<String>
+		 * vision(MultipartHttpServletRequest multipartRequest,
+		 * 
+		 * @RequestParam("type") String type,
+		 * 
+		 * @RequestParam("pjtNo") int pjtNo) throws Exception {
+		 * 
+		 * List<String> list = new ArrayList<String>(); MultipartFile mpf = null;
+		 * UploadFile uf = new UploadFile();
+		 * 
+		 * mpf = multipartRequest.getFile(type);
+		 * uf.setOriginFileName(mpf.getOriginalFilename());
+		 * 
+		 * 
+		 * String dirPath = IMG_PATH + "/" + pjtNo; LOGGER.info("dirPath : "+dirPath);
+		 * File folder = new File(dirPath); if(!folder.exists()) { try {
+		 * 
+		 * folder.mkdirs();
+		 * 
+		 * }catch(Exception e){
+		 * 
+		 * e.printStackTrace();
+		 * 
+		 * }
+		 * 
+		 * }else {
+		 * 
+		 * LOGGER.info("directory already exits");
+		 * 
+		 * }
+		 * 
+		 * uf.setSaveFileName(dirPath+"/"+uf.getOriginFileName()); mpf.transferTo(new
+		 * File(uf.getSaveFileName()));
+		 * 
+		 * 
+		 * 
+		 * 
+		 * String textFromImage = this.cloudVisionTemplate
+		 * .extractTextFromImage(this.resourceLoader.getResource("file:" +
+		 * uf.getSaveFileName()));
+		 * 
+		 * LOGGER.info(" parsedTextByVision : "+textFromImage);
+		 * 
+		 * if (type.equals("IDCard")) {
+		 * 
+		 * if (textFromImage.indexOf("운전") != -1) { String tnws =
+		 * textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Matcher matcher =
+		 * CI_PATTERN.matcher(tnws); boolean ex = matcher.find(); LOGGER.info(ex);
+		 * if(ex) { String CI = matcher.group(); LOGGER.info(CI); String name =
+		 * tnws.substring(tnws.indexOf(CI) - 3, tnws.indexOf(CI));
+		 * 
+		 * list.add(CI); list.add(name); } } else if (textFromImage.indexOf("주민") != -1)
+		 * { String tnws = textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Matcher
+		 * matcher = CI_PATTERN.matcher(tnws); boolean ex = matcher.find();
+		 * LOGGER.info(ex); if(ex){ String CI = matcher.group(); LOGGER.info(CI); int
+		 * start = tnws.indexOf("주민등록증") + "주민등록증".length(); int end = start + 3; String
+		 * name = tnws.substring(start, end); list.add(CI); list.add(name); } } }
+		 * 
+		 * if (type.equals("account")) {
+		 * 
+		 * }
+		 * 
+		 * if (type.equals("businessLicense")) { String tnws =
+		 * textFromImage.replaceAll(RWS, ""); LOGGER.info(tnws); Pattern pattern =
+		 * Pattern.compile("\\d{3}\\-\\d{2}\\-\\d{5}"); Matcher matcher =
+		 * pattern.matcher(tnws); boolean b = matcher.find();
+		 * 
+		 * LOGGER.info(b); if(b) { String businessLicenseNo = matcher.group();
+		 * LOGGER.info(businessLicenseNo); list.add(businessLicenseNo);
+		 * if(tnws.indexOf("법인사업자") != -1) { int start = tnws.indexOf("단체명")+5; int end
+		 * = tnws.indexOf("대표자"); String corporateName = tnws.substring(start, end);
+		 * LOGGER.info(corporateName);
+		 * 
+		 * String sellerName = tnws.substring(tnws.indexOf("대표자:")+4,
+		 * tnws.indexOf("개업"));
+		 * 
+		 * LOGGER.info(sellerName);
+		 * 
+		 * list.add(sellerName); list.add(corporateName);
+		 * 
+		 * }else if(tnws.indexOf("일반과세자")!=-1) { int start =
+		 * tnws.indexOf(businessLicenseNo); int startSangho = tnws.indexOf(":",
+		 * start)+1; int endSangho = tnws.indexOf(":", startSangho)-2;
+		 * LOGGER.info(start+"/"+startSangho + "/" + endSangho); String sangho =
+		 * tnws.substring(startSangho, endSangho); String name =
+		 * tnws.substring(tnws.indexOf(":", endSangho)+1, tnws.indexOf("월일",
+		 * endSangho)-3); LOGGER.info(sangho); LOGGER.info(name); list.add(name);
+		 * list.add(sangho); } }
+		 * 
+		 * }
+		 * 
+		 * return list; }
+		 * 
+		 * //
+		 */	
 	@GetMapping("json/updatePjtStatus")
 	public Integer updatePjtStatus(@RequestParam("pjtNo")int pjtNo, @RequestParam("pjtStatus")String pjtStatus){
 		
