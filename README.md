@@ -11,7 +11,7 @@ bitcamp JR01 main project 펀딩고
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130726228-4de83a82-4a23-4e99-9ba1-7f079b76b104.gif">
 - 카테고리별, 상태(오픈 예정, 진행중, 완료됨)별 분류와 정렬(최신, 인기, 성공임박, 마감임박, 누적액) 기능 제공하는 상품목록 페이지<br/>
 - 무한스크롤<br/>
-- ajax, RESTful, AOS
+- Ajax, JSON, RESTful, AOS
 <br/><br/><hr/><br/><br/>
 3. 프로젝트(상품) 상세<br/>
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130727907-e935cf8f-e761-45ed-9482-b11483b121d9.gif">
@@ -21,7 +21,7 @@ bitcamp JR01 main project 펀딩고
 4. 채팅서비스
 <br/>
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130727938-707af375-e5f9-437d-88b4-88cd15e7be40.gif">
-
+- node.js, socket.io, express.js, ejs 이용 채팅서비스 구현
 <br/><br/><hr/><br/><br/>
 
 5. 프로젝트(상품) 등록
