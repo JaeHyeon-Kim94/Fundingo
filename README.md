@@ -9,8 +9,8 @@ bitcamp JR01 main project 펀딩고
 <br/><br/><hr/><br/><br/>
 2. 프로젝트(상품) 목록<br/>
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130726228-4de83a82-4a23-4e99-9ba1-7f079b76b104.gif">
-- 카테고리별, 상태(오픈 예정, 진행중, 완료됨)별 분류와 정렬(최신, 인기, 성공임박, 마감임박, 누적액) 기능 제공하는 상품목록 페이지
-- 무한스크롤
+- 카테고리별, 상태(오픈 예정, 진행중, 완료됨)별 분류와 정렬(최신, 인기, 성공임박, 마감임박, 누적액) 기능 제공하는 상품목록 페이지<br/>
+- 무한스크롤<br/>
 - ajax, RESTful, AOS
 <br/><br/><hr/><br/><br/>
 3. 프로젝트(상품) 상세<br/>
@@ -31,7 +31,9 @@ bitcamp JR01 main project 펀딩고
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130727890-8aadff9b-709d-4a97-a53d-9cfcb8a7bc5c.gif">
 - acordian 이용한 단계별 프로젝트(상품) 등록절차 제공
 - 등록과정에서의 정보제공을 위한 툴팁 구현
+<br/>
 	- 공통 : toast 통해 사용자 친화적 alert 기능 구현
+	<br/>
 	- 공통 : ajax, RESful 이용
 	 
  <br/><br/><br/><br/>
