@@ -29,12 +29,7 @@ bitcamp JR01 main project 펀딩고
  -5.1
  <br/>
 <img width="80%" src="https://user-images.githubusercontent.com/84181831/130727890-8aadff9b-709d-4a97-a53d-9cfcb8a7bc5c.gif">
-- acordian 이용한 단계별 프로젝트(상품) 등록절차 제공
-- 등록과정에서의 정보제공을 위한 툴팁 구현
-<br/>
-	- 공통 : toast 통해 사용자 친화적 alert 기능 구현
-	<br/>
-	- 공통 : ajax, RESful 이용
+Ajax, JSON, RESful 이용한 프로젝트 신청 데이터 처리
 	 
  <br/><br/><br/><br/>
 
